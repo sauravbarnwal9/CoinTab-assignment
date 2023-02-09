@@ -1,35 +1,33 @@
 import React from "react";
-import { Box,Image } from "@chakra-ui/react";
+import { Box, Image, Stack, Heading } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileTable } from "../components/ProfileTable";
-import { EmptyCard } from "../components/EmptyCard";
 import Pagination from "../components/Pagination.jsx";
-
-
+import FilterSection from "../components/FilterSection";
 
 export const User = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState("");
-  const [dataall,setDataall] = useState([]);
-  
+  const [detail, setdetail] = useState([]);
+
   const navigate = useNavigate();
   const fetchUsers = () => {
-    fetch(`https://backendcointab.vercel.app/data?limit=10&page=${page}&filter=${filter}`)
+    fetch(
+      `https://backendcointab.vercel.app/api/data?limit=10&page=${page}&filter=${filter}`
+    )
       .then((response) => response.json())
       .then((data) => {
-        
         setData(data);
       });
   };
   const fetchUsersall = () => {
-    fetch(`https://backendcointab.vercel.app/alldata?filter=${filter}`)
+    fetch(`https://backendcointab.vercel.app/api/alldata?filter=${filter}`)
       .then((response) => response.json())
       .then((data) => {
-        
-        setDataall(data);
+        setdetail(data);
       });
   };
   useEffect(() => {
@@ -44,17 +42,30 @@ export const User = () => {
 
   return (
     <Box>
-      <FlexComponent filter={filter} setFilter={setFilter} setPage={setPage}/>
-      
-{
-  data.length==0?<><EmptyCard /></>
-  :<>
-  <ProfileTable page={page} setPage={setPage} data={data} number={Math.ceil(dataall.length/10)}/>
-  <Pagination currentpage={page} handlePage={setPage} totalPages={Math.ceil(dataall.length/10)}/>
-  </>
-}
+      <FilterSection filter={filter} setFilter={setFilter} setPage={setPage} />
+
+      {data.length == 0 ? (
+        <>
+          {" "}
+          <Stack mt="6" spacing="3">
+            <Heading size="md">NO DATA AVAILABLE</Heading>
+          </Stack>
+        </>
+      ) : (
+        <>
+          <ProfileTable
+            page={page}
+            setPage={setPage}
+            data={data}
+            number={Math.ceil(detail.length / 10)}
+          />
+          <Pagination
+            currentpage={page}
+            handlePage={setPage}
+            totalPages={Math.ceil(detail.length / 10)}
+          />
+        </>
+      )}
     </Box>
   );
 };
-
-

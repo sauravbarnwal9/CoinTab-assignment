@@ -11,7 +11,7 @@ const app = express();
 app.use(cors())
 
 app.use(express.json());
-app.use("/", projectRouter);
+app.use("/api", projectRouter);
 app.get("/",((req,res)=>{
   res.status(201).send("<h1>Hello </h1> ")
 }))

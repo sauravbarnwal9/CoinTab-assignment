@@ -1,17 +1,17 @@
 import React from "react";
 import { Tr, Td, Image } from "@chakra-ui/react";
 
-const UserTable = ({ data }) => {
+const UserTable = ({ user }) => {
   return (
     <Tr>
       <Td>
-        <Image borderRadius="full" src={data.picture.medium} />
+        <Image  src={user.picture.medium} />
       </Td>
-      <Td>{data.name.first}</Td>
-      <Td>{data.location.country}</Td>
-      <Td>{data.gender}</Td>
-      <Td>{data.email}</Td>
-      <Td>{data.phone}</Td>
+      <Td>{user.name.first}</Td>
+      <Td>{user.location.country}</Td>
+      <Td>{user.gender}</Td>
+      <Td>{user.email}</Td>
+      <Td>{user.phone}</Td>
     </Tr>
   );
 };

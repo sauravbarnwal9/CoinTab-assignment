@@ -28,7 +28,7 @@ const fetchUsers=()=>{
 const DeleteUsers=()=>{
   alert("All The Data Will be Deleted");
     setLoading1(true)
-    fetch('https://backendcointab.vercel.app/delete', {
+    fetch('https://backendcointab.vercel.app/api/delete', {
         method: 'DELETE'
       
       })
@@ -54,7 +54,7 @@ navigate("/users")
 }
   return (
    <>
-   <Box bg="black" h="100vh">
+   <Box bg="blue" h="100vh">
    <Box
     display='flex'
     alignItems='center'
@@ -70,28 +70,28 @@ navigate("/users")
     {
     loading?<Button
     isLoading
-    colorScheme='pink'
+    colorScheme='blue'
     
   >
     Click me
   </Button>
-    : <Button onClick={fetchUsers} colorScheme='pink'>
+    : <Button onClick={fetchUsers} colorScheme='blue'>
     Fetch Users
    </Button>
  }
   {
     loading1?<><Button
     isLoading
-    colorScheme='pink'
+    colorScheme='blue'
     
   >
     Click me
   </Button></>
-    :<Button colorScheme='pink' onClick={DeleteUsers}>
+    :<Button colorScheme='blue' onClick={DeleteUsers}>
     Delete Users
     </Button>
   }
-  <Button colorScheme='pink' onClick={userDetails}>
+  <Button colorScheme='blue' onClick={userDetails}>
   User Details
   </Button>
     </ButtonGroup>
